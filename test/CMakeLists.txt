@@ -13,4 +13,10 @@ add_executable(tests tests.cpp)
 target_link_libraries(tests PRIVATE gtest_main
     PUBLIC mylib)
 
+if(MSVC)
+    target_compile_options(tests PRIVATE /W4 /WX)
+else()
+    target_compile_options(tests PRIVATE -Wall -Wextra -pedantic -Werror)
+endif()
+
 gtest_discover_tests(tests)
