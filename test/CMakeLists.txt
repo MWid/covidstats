@@ -11,7 +11,7 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(tests tests.cpp)
 target_link_libraries(tests PRIVATE gtest_main
-    PUBLIC mylib)
+    PUBLIC casesrepo)
 
 if(MSVC)
     target_compile_options(tests PRIVATE /W4 /WX)

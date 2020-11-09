@@ -1,9 +1,10 @@
-#include "mylib.h"
+#include "RKICasesRepository.h"
 #include <iostream>
 
 using namespace std;
+using namespace covidstats;
 
 int main() {
-  auto x = 5;
-  cout << x << "! = " << mylib::factorial(x) << endl;
+  cout << "New cases: " << casesrepository::RKICasesRepository{}.getNewCases()
+       << endl;
 }
