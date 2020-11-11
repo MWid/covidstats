@@ -10,7 +10,10 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 add_executable(tests tests.cpp)
-target_link_libraries(tests PRIVATE gtest_main
+
+find_package(nlohmann_json CONFIG REQUIRED)
+
+target_link_libraries(tests PRIVATE gtest_main PRIVATE nlohmann_json::nlohmann_json
     PUBLIC casesrepo)
 
 if(MSVC)

@@ -3,6 +3,7 @@
 
 #include "CasesRepository.h"
 
+#include <nlohmann/json_fwd.hpp>
 #include <string>
 
 namespace covidstats {
@@ -12,8 +13,7 @@ public:
   int getNewCases();
 
 private:
-  std::string jsonData_ = "";
-  void downloadData();
+  nlohmann::json downloadData();
 };
 } // namespace casesrepository
 } // namespace covidstats
