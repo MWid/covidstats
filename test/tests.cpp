@@ -1,8 +1,9 @@
+#define _TURN_OFF_PLATFORM_STRING
 #include "RKICasesRepository.h"
 #include "gtest/gtest.h"
 
 using namespace covidstats;
 
 TEST(RKICasesRepository, GetNewCases) {
-  EXPECT_EQ(casesrepository::RKICasesRepository{}.getNewCases(), 42);
+  EXPECT_GT(casesrepository::RKICasesRepository{}.getNewCases(), 0);
 }
