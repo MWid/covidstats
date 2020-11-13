@@ -5,7 +5,6 @@
 
 #include <cpprest/http_client.h>
 #include <nlohmann/json_fwd.hpp>
-#include <string>
 
 namespace covidstats {
 namespace casesrepository {
@@ -15,7 +14,7 @@ public:
   int getNewCases();
 
 private:
-  nlohmann::json downloadData();
+  nlohmann::json retrieveData();
   web::http::client::http_client client_;
 };
 } // namespace casesrepository
