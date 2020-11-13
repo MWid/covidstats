@@ -2,5 +2,8 @@
     "files.associations": {
         "stdexcept": "cpp"
     },
-    "C/C++ Include Guard.Macro Type": "Filepath"
+    "C/C++ Include Guard.Macro Type": "Filepath",
+    "cmake.configureSettings": {
+        "CMAKE_TOOLCHAIN_FILE": "scripts/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    }
 }

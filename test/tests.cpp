@@ -1,9 +1,12 @@
-#include "mylib.h"
+// The cpprestsdk defines a macro "U" for platform strings.
+// This macro does not work together with gtest hence we turn it off.
+// We do not need it here anyway.
+#define _TURN_OFF_PLATFORM_STRING
+#include "RKICasesRepository.h"
 #include "gtest/gtest.h"
 
-TEST(FactorialsTest, ComputeFactorials) {
-  EXPECT_EQ(mylib::factorial(1), 1);
-  EXPECT_EQ(mylib::factorial(2), 2);
-  EXPECT_EQ(mylib::factorial(3), 6);
-  EXPECT_EQ(mylib::factorial(10), 3628800);
+using namespace covidstats;
+
+TEST(RKICasesRepository, GetNewCases) {
+  EXPECT_GT(casesrepository::RKICasesRepository{}.getNewCases(), 0);
 }
