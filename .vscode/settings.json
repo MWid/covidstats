@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "memory": "cpp"
     },
     "C/C++ Include Guard.Macro Type": "Filepath",
     "cmake.configureSettings": {

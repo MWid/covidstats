@@ -5,8 +5,11 @@
 #include "RKICasesRepository.h"
 #include "gtest/gtest.h"
 
+#include <memory>
+
 using namespace covidstats;
 
 TEST(RKICasesRepository, GetNewCases) {
-  EXPECT_GT(casesrepository::RKICasesRepository{}.getNewCases(), 0);
+  auto repo = std::make_unique<casesrepository::RKICasesRepository>();
+  EXPECT_GT(repo->getNewCases(), 0);
 }
