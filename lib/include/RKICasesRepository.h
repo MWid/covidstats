@@ -10,12 +10,14 @@ namespace covidstats {
 namespace casesrepository {
 class RKICasesRepository : public CasesRepository {
 public:
-  RKICasesRepository();
   int getNewCases();
 
 private:
   nlohmann::json retrieveData();
-  web::http::client::http_client client_;
+  web::http::client::http_client client_{
+      web::http::client::http_client{_XPLATSTR(
+          "https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/"
+          "RKI_COVID19/FeatureServer/0/")}};
 };
 } // namespace casesrepository
 } // namespace covidstats

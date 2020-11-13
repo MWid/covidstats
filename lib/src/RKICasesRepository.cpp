@@ -28,11 +28,6 @@ utility::string_t getQueryUriForNewCases() {
 namespace covidstats {
 namespace casesrepository {
 
-RKICasesRepository::RKICasesRepository()
-    : client_{web::http::client::http_client{U(
-          "https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/"
-          "RKI_COVID19/FeatureServer/0/")}} {}
-
 int RKICasesRepository::getNewCases() {
   try {
     auto jsonData = retrieveData();

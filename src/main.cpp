@@ -5,6 +5,6 @@ using namespace std;
 using namespace covidstats;
 
 int main() {
-  cout << "New cases: " << casesrepository::RKICasesRepository{}.getNewCases()
-       << endl;
+  auto repo = new casesrepository::RKICasesRepository{};
+  cout << "New cases: " << repo->getNewCases() << endl;
 }
