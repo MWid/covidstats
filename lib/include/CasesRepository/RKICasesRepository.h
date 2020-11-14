@@ -13,7 +13,7 @@ namespace casesrepository {
 // RKI.
 class RKICasesRepository : public CasesRepository {
 public:
-  int getNewCases();
+  virtual int getNewCases();
 
 private:
   nlohmann::json retrieveNewCases();

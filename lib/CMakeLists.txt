@@ -1,4 +1,4 @@
-add_library(casesrepo src/CasesRepository/RKICasesRepository.cpp)
+add_library(casesrepo src/CasesRepository/RKICasesRepository.cpp src/ResultStream/StdoutResultStream.cpp)
 
 find_package(cpprestsdk CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
