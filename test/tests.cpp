@@ -2,7 +2,7 @@
 // This macro does not work together with gtest hence we turn it off.
 // We do not need it here anyway.
 #define _TURN_OFF_PLATFORM_STRING
-#include "RKICasesRepository.h"
+#include "CasesRepository/RKICasesRepository.h"
 #include "gtest/gtest.h"
 
 #include <memory>

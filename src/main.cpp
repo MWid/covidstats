@@ -1,4 +1,4 @@
-#include "RKICasesRepository.h"
+#include "CasesRepository/RKICasesRepository.h"
 
 #include <iostream>
 #include <memory>
