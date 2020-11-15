@@ -1,3 +1,5 @@
+#ifndef LIB_INCLUDE_RESULTSTREAM_RESULTSTREAM
+#define LIB_INCLUDE_RESULTSTREAM_RESULTSTREAM
 namespace covidstats {
 namespace resultstream {
 class ResultStream {
@@ -7,3 +9,4 @@ public:
 };
 } // namespace resultstream
 } // namespace covidstats
+#endif /* LIB_INCLUDE_RESULTSTREAM_RESULTSTREAM */

@@ -1,26 +1,20 @@
-#include "CasesRepository/RKICasesRepository.h"
-#include "ResultStream/StdoutResultStream.h"
+#include "App.h"
 
 #include <cstdlib>
 #include <exception>
 #include <iostream>
-#include <memory>
 
 using namespace std;
 using namespace covidstats;
 
-int main() {
+int main(int argc, char *argv[]) {
   try {
-    auto repo = std::make_unique<casesrepository::RKICasesRepository>();
-    auto newCases = repo->getNewCases();
-    auto output = std::make_unique<resultstream::StdoutResultStream>();
-    output->write(newCases);
-    return EXIT_SUCCESS;
+    auto app = App{argc, argv};
+    return app.run();
   } catch (exception &e) {
-    cout << "Es ist ein unerwarteter Fehler aufgetreten. Die Anwendung muss "
-            "beendet werden."
-         << "\n"
-         << e.what() << "\n";
+    cout
+        << "An unexpected error has occurred. The application must be closed.\n"
+        << e.what() << "\n";
     return EXIT_FAILURE;
   }
 }
