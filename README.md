@@ -1,5 +1,5 @@
 # covidstats
-This little command line tool retrieves the daily new infections with COVID 19 as reported by the RKI.
+This little command line tool retrieves the daily new infections with COVID 19 as reported by the [RKI](https://www.rki.de).
 
 # Usage
 ```cmd
@@ -16,7 +16,7 @@ Builds are only tested under Windows 10 using MSBuild Tools 2019 (16.8.1).
 You need a current C++ compiler supporting C++ 17 and [CMake](https://cmake.org/).
 
 ## Cloning repository
-To build from source you need to clone this repository first. Since this repository uses the package manager [vcpkg](https://github.com/microsoft/vcpkg) you have to run the following command:
+To build from source you need to clone this repository first. Since this repository uses the package manager [vcpkg](https://github.com/microsoft/vcpkg) as a git submodule you have to run the following command:
 ```cmd
 git clone --recurse-submodules https://github.com/MWid/covidstats.git
 ```
@@ -32,6 +32,7 @@ The following libraries are requiered:
 * [cpprestsdk](https://github.com/microsoft/cpprestsdk)
 * [Boost](https://www.boost.org/)
 * [nlohmann_json](https://github.com/nlohmann/json)
+
 To install them just type
 ```cmd
 scripts/vcpkg/vcpkg.exe install boost-algorithm:x64-windows boost-program-options:x64-windows nlohmann-json:x64-windows cpprestsdk:x64-windows
