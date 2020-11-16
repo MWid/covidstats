@@ -4,12 +4,16 @@
 #include "ResultStream/FileResultStream.h"
 #include "ResultStream/StdoutResultStream.h"
 
+#include <boost/algorithm/string.hpp>
+
 #include <cstdio>
+#include <filesystem>
 #include <iostream>
+namespace fs = std::filesystem;
 
 namespace covidstats {
 App::App(int argc, char *argv[])
-    : fileName_{}, desc_{"Allowed options"}, vm_{} {
+    : desc_{"Allowed options"}, vm_{}, fileName_{} {
   desc_.add_options()
       // First parameter describes option name/short name
       // The second is parameter to option
@@ -29,16 +33,47 @@ int App::run() {
     return EXIT_SUCCESS;
   }
 
-  auto output = static_cast<std::unique_ptr<resultstream::ResultStream>>(
-      std::make_unique<resultstream::StdoutResultStream>());
-  if (vm_.count("output")) {
-    output = std::make_unique<resultstream::FileResultStream>(
-        vm_["output"].as<std::string>());
-  }
+  handleCommandLine();
+
+  auto outputStream = makeOutputStream();
 
   auto repo = std::make_unique<casesrepository::RKICasesRepository>();
   auto newCases = repo->getNewCases();
-  output->write(newCases);
+  outputStream->write(newCases);
   return EXIT_SUCCESS;
 }
+
+void App::handleCommandLine() {
+  if (vm_.count("output")) {
+    fileName_ = vm_["output"].as<std::string>();
+    boost::trim(fileName_);
+  }
+}
+
+std::unique_ptr<resultstream::ResultStream> App::makeOutputStream() {
+  if (fileName_.empty()) {
+    return std::make_unique<resultstream::StdoutResultStream>();
+  }
+
+  if (fs::exists(fileName_)) {
+    if (!fs::is_regular_file(fileName_)) {
+      std::cout << "Cannot write to " << fileName_
+                << " because it is not a regular file.\n";
+      std::exit(EXIT_FAILURE);
+    } else {
+      std::cout << fileName_
+                << " already exists.\nShould it be replaced? [y]es, [n]o: ";
+      char input;
+      std::cin >> input;
+      // Here we are actually cheating: We always abort the app unless the
+      // user types in 'y'.
+      if (input != 'y') {
+        std::cout << "\nAbort!\n";
+        std::exit(EXIT_FAILURE);
+      }
+    }
+  }
+  return std::make_unique<resultstream::FileResultStream>(fileName_);
+}
+
 } // namespace covidstats
