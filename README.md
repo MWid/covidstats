@@ -51,7 +51,7 @@ cmake --build . --config Release --target ALL_BUILD
 If everything works as expected you find the executable `covidstats` (and 2 dlls) in the subdirectory `src/Release`.
 
 ## Building covidstats as single executable
-If you want to build `covidstats` as a single executable without any dependencies (besides the dependencies to the C runtime) then copy the file [x64-windows-mixed.cmake](../blob/master/x64-windows-mixed.cmake) to the subdirectory `scripts/vcpkg/triplets` of your source directory and then run:
+If you want to build `covidstats` as a single executable without any dependencies (besides the dependencies to the C runtime) then copy the file [x64-windows-mixed.cmake](x64-windows-mixed.cmake) to the subdirectory `scripts/vcpkg/triplets` of your source directory and then run:
 ```cmd
 scripts/vcpkg/vcpkg.exe install boost-algorithm:x64-windows-mixed boost-program-options:x64-windows-mixed nlohmann-json:x64-windows-mixed cpprestsdk:x64-windows-mixed
 ```
