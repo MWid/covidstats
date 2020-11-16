@@ -90,6 +90,7 @@
     },
     "C/C++ Include Guard.Macro Type": "Filepath",
     "cmake.configureSettings": {
-        "CMAKE_TOOLCHAIN_FILE": "scripts/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        "CMAKE_TOOLCHAIN_FILE": "scripts/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-mixed"
     }
 }
