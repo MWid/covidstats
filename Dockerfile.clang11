@@ -1,0 +1,43 @@
+FROM ubuntu:20.04 AS compiler
+
+RUN apt-get update -qq && \
+    DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+    ca-certificates \
+    xz-utils \
+    build-essential \
+    curl \
+    zip \
+    unzip \
+    pkg-config \
+    git \
+    cmake \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -SL https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz \
+    | tar -xJC . && \
+    mv clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04 clang_11.0.0
+
+FROM compiler AS builder
+
+ENV PATH="/clang_11.0.0/bin:$PATH"
+ENV LD_LIBRARY_PATH="/clang_11.0.0/lib:$LD_LIBRARY_PATH"
+ENV CC="clang"
+ENV CXX="clang++"
+
+# clone source code
+RUN git clone --recurse-submodules https://github.com/MWid/covidstats.git
+
+WORKDIR /covidstats
+
+# build vcpkg package manager
+RUN cd scripts/vcpkg && ./bootstrap-vcpkg.sh
+
+# build libraries
+RUN cd scripts/vcpkg && ./vcpkg install boost-algorithm:x64-linux boost-program-options:x64-linux nlohmann-json:x64-linux cpprestsdk:x64-linux
+
+# build covidstats
+RUN cmake -DCMAKE_TOOLCHAIN_FILE:STRING=scripts/vcpkg/scripts/buildsystems/vcpkg.cmake -S . -B ../build -G "Unix Makefiles" && \
+    cd ../build && cmake --build . --config Release --target all
+
+# Start from a Bash prompt
+CMD [ "/bin/bash" ]
