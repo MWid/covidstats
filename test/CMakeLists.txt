@@ -11,10 +11,7 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(tests tests.cpp)
 
-find_package(nlohmann_json CONFIG REQUIRED)
-
-target_link_libraries(tests PRIVATE gtest_main PRIVATE nlohmann_json::nlohmann_json
-    PUBLIC casesrepo)
+target_link_libraries(tests PRIVATE casesrepo gtest_main)
 
 if(MSVC)
     target_compile_options(tests PRIVATE /W4 /WX)
