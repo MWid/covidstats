@@ -8,7 +8,7 @@ namespace covidstats {
 namespace resultstream {
 class StdoutResultStream : public ResultStream {
 public:
-  virtual void write(int data);
+  virtual void write(int data) override;
 };
 } // namespace resultstream
 } // namespace covidstats

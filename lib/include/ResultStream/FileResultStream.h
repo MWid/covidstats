@@ -10,7 +10,7 @@ namespace resultstream {
 class FileResultStream : public ResultStream {
 public:
   FileResultStream(const std::string &filename);
-  virtual void write(int data);
+  virtual void write(int data) override;
 
 private:
   std::ofstream fileStream_;
