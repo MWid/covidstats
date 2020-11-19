@@ -36,7 +36,7 @@ RUN cd scripts/vcpkg && ./bootstrap-vcpkg.sh
 RUN cd scripts/vcpkg && ./vcpkg install boost-algorithm:x64-linux boost-program-options:x64-linux nlohmann-json:x64-linux cpprestsdk:x64-linux
 
 # build covidstats
-RUN cmake -DCMAKE_TOOLCHAIN_FILE:STRING=scripts/vcpkg/scripts/buildsystems/vcpkg.cmake -S . -B ../build -G "Unix Makefiles" && \
+RUN cmake -DCMAKE_TOOLCHAIN_FILE:STRING=scripts/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ../build -G "Unix Makefiles" && \
     cd ../build && cmake --build . --config Release --target all
 
 # Start from a Bash prompt
